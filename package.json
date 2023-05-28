@@ -1,0 +1,30 @@
+{
+  "name": "torapi",
+  "version": "1.0.0",
+  "description": "CLI to search and download torrents",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "npx tsc && node ./dist/index.js search \"john wick 4\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "4.1.2",
+    "commander": "10.0.1",
+    "torrent-search-api": "^2.1.4",
+    "torrent-stream": "^1.2.1",
+    "ts-luxon": "^4.3.2"
+  },
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/commander": "^2.12.2",
+    "@types/node": "^20.2.5",
+    "@types/torrent-search-api": "^2.0.0",
+    "@types/torrent-stream": "^0.0.6",
+    "typescript": "^5.0.4"
+  },
+  "bin": {
+    "torapi": "./dist/index.js"
+  }
+}
