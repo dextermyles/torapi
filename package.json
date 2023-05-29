@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "npx tsc && node ./dist/index.js search \"john wick 4\""
+    "start": "npx tsc && node ./dist/index.js search \"john wick 4\"",
+    "update": "git pull && git fetch && npm install && npm install -g"
   },
   "author": "",
   "license": "ISC",
