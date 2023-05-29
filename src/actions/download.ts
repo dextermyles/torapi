@@ -83,8 +83,8 @@ export async function download(magnet: string, path?: string) {
                 var mbytes = (kbytes / 1024).toFixed(2);
                 
                 var etaSeconds = (bytesRemaining / averageBytesPerSec);
-                var etaMins = (etaSeconds * 60);
-                var etaHours = (etaMins * 60);
+                var etaMins = (etaSeconds / 60);
+                var etaHours = (etaMins / 60);
 
                 var timeleft = `${etaHours.toFixed(2)} hours`;
 
