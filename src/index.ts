@@ -12,6 +12,7 @@ program.command('search')
 
 program.command('download')
     .argument('magnet', 'magnet link')
-    .action((magnet) => download(magnet))
+    .argument('path', 'c:/media/<path>')
+    .action((magnet, path) => download(magnet))
 
 program.parse();
