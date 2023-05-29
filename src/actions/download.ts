@@ -67,27 +67,34 @@ export async function download(magnet: string, path?: string) {
                 var timeDiff = downloadedAt.diff(lastDate, 'milliseconds')
                     .milliseconds;
 
-                var msDiff = (timeDiff / 1000.0);
+                var msDiff = (1000.0 / timeDiff);
                 var bytesPerSec = (diff * msDiff);
 
                 history.push(bytesPerSec);
+
                 if (history.length > 10)
                     history.splice(0, 1);
 
-                var kbytes = (bytesPerSec / 1024);
-                var mbytes = (kbytes / 1024).toFixed(2);
-                var speed = `${mbytes} mb/s`;
-
-                var averageBytesPerSec = _.sum(history) / history.length;
+                var averageBytesPerSec = (_.sum(history) / history.length);
                 if (completed > 95)
                     averageBytesPerSec = bytesPerSec;
 
-                var eta = (bytesRemaining / bytesPerSec);
-                var mins = (eta * 60);
-                var timeleft = `${mins} mins`;
+                var kbytes = (averageBytesPerSec / 1024);
+                var mbytes = (kbytes / 1024).toFixed(2);
+                
+                var etaSeconds = (bytesRemaining / averageBytesPerSec);
+                var etaMins = (etaSeconds * 60);
+                var etaHours = (etaMins * 60);
 
-                if (mins <= 1)
-                    timeleft = `${eta} secs`;
+                var timeleft = `${etaHours.toFixed(2)} hours`;
+
+                if (etaHours < 1)
+                    timeleft = `${etaMins.toFixed(2)} minutes`;
+
+                if (etaMins < 1)
+                    timeleft = `${etaSeconds.toFixed(2)} minutes`;
+
+                var speed = `${mbytes} mb/s`;
 
                 console.log(chalk.cyanBright(`${completed}% | ${speed} | ${timeleft} remaining`));
 
@@ -102,7 +109,6 @@ export async function download(magnet: string, path?: string) {
 
                 lastDownloaded = downloaded;
                 lastDate = downloadedAt;
-                lastBytesPerSec = bytesPerSec;
             });
 
             engine.on('idle', () => {
