@@ -1,8 +1,9 @@
 # torapi
 Lightweight Torrent CLI
 
-`npm run update/n`
-`torapi search <string>/n`
+`npm run update`
+
+`torapi search <string>`
 
 Copy the magnet URL to your clipboard
 
