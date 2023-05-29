@@ -16,7 +16,7 @@ function searchTorrentApi(keyword) {
             const searchResults = torrents.map((t) => {
                 const torr = new search_result_1.SearchResult(t.title, t.magnet, t.size, t.peers, t.seeds);
                 return torr;
-            });
+            }).filter(x => x.seeds && x.seeds > 0);
             resolve(searchResults);
         }, (err) => {
             console.log(chalk_1.default.red(err));

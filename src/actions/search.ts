@@ -14,7 +14,7 @@ export function searchTorrentApi(keyword: string): Promise<void> {
             const searchResults = torrents.map((t) => {
                 const torr = new SearchResult(t.title, t.magnet, t.size, t.peers, t.seeds);
                 return torr;
-            });
+            }).filter(x => x.seeds && x.seeds > 0);
             resolve(searchResults);
         }, (err) => {
             console.log(chalk.red(err));
