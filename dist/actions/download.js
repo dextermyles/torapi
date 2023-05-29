@@ -91,22 +91,25 @@ function download(magnet, path) {
                     var diff = downloaded - lastDownloaded;
                     var timeDiff = downloadedAt.diff(lastDate, 'milliseconds')
                         .milliseconds;
-                    var msDiff = (timeDiff / 1000.0);
+                    var msDiff = (1000.0 / timeDiff);
                     var bytesPerSec = (diff * msDiff);
                     history.push(bytesPerSec);
                     if (history.length > 10)
                         history.splice(0, 1);
-                    var kbytes = (bytesPerSec / 1024);
-                    var mbytes = (kbytes / 1024).toFixed(2);
-                    var speed = `${mbytes} mb/s`;
-                    var averageBytesPerSec = lodash_1.default.sum(history) / history.length;
+                    var averageBytesPerSec = (lodash_1.default.sum(history) / history.length);
                     if (completed > 95)
                         averageBytesPerSec = bytesPerSec;
-                    var eta = (bytesRemaining / bytesPerSec);
-                    var mins = (eta * 60);
-                    var timeleft = `${mins} mins`;
-                    if (mins <= 1)
-                        timeleft = `${eta} secs`;
+                    var kbytes = (averageBytesPerSec / 1024);
+                    var mbytes = (kbytes / 1024).toFixed(2);
+                    var etaSeconds = (bytesRemaining / averageBytesPerSec);
+                    var etaMins = (etaSeconds * 60);
+                    var etaHours = (etaMins * 60);
+                    var timeleft = `${etaHours.toFixed(2)} hours`;
+                    if (etaHours < 1)
+                        timeleft = `${etaMins.toFixed(2)} minutes`;
+                    if (etaMins < 1)
+                        timeleft = `${etaSeconds.toFixed(2)} minutes`;
+                    var speed = `${mbytes} mb/s`;
                     console.log(chalk_1.default.cyanBright(`${completed}% | ${speed} | ${timeleft} remaining`));
                     if (completed >= 100) {
                         console.log(chalk_1.default.green("DOWNLOAD COMPLETE!"));
@@ -117,7 +120,6 @@ function download(magnet, path) {
                     }
                     lastDownloaded = downloaded;
                     lastDate = downloadedAt;
-                    lastBytesPerSec = bytesPerSec;
                 });
                 engine.on('idle', () => {
                     console.log(chalk_1.default.green("IDLING..."));
