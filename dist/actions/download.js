@@ -67,7 +67,6 @@ function download(magnet, path) {
             });
             engine.on('torrent', () => {
                 console.log(chalk_1.default.green('** Metadata has been fetched **'));
-                console.log(engine.files.map(x => { x.name + `[${((x.length / 1024) / 1024)} mb]`; }));
             });
             engine.on('ready', () => {
                 engine.files.forEach(function (file) {

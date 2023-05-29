@@ -46,7 +46,6 @@ export function download(magnet: string, path?: string | undefined): Promise<voi
 
             engine.on('torrent', () => {
                 console.log(chalk.green('** Metadata has been fetched **'));
-                console.log(engine.files.map(x => { x.name + `[${((x.length / 1024) / 1024)} mb]` }))
             });
 
             engine.on('ready', () => {
