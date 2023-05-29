@@ -1,20 +1,34 @@
 import chalk from 'chalk';
+import * as fs from 'fs';
 import _ from 'lodash';
 import torrentStream from 'torrent-stream';
 import { DateTime } from 'ts-luxon';
 
 
+export async function download(magnet: string, path?: string) {
+    if (!path)
+        path = 'movies';
 
-export async function download(magnet: string, path: string) {
+    path = `C:\\media\\${path}\\`;
+
     let options: TorrentStream.TorrentEngineOptions = {
         connections: 200,
         uploads: 10,
         tmp: 'C:\\tmp',
-        path: `C:\\media\\${path}\\`, // Where to save the files. Overrides `tmp`.
+        path,
         verify: true,
         dht: true,
         tracker: true
     };
+
+    var exists = fs.existsSync(path);
+
+    if (!exists) {
+        fs.mkdirSync(path);
+    }
+
+    console.log(chalk.blue(`DOWNLOAD PATH: ${path}`));
+
     var totalLengthBytes = 0;
     var totalFiles = 0;
     var completed = 0;

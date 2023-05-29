@@ -11,6 +11,7 @@ program.command('search')
     .action((keyword) => (0, search_1.searchTorrentApi)(keyword));
 program.command('download')
     .argument('magnet', 'magnet link')
-    .action((magnet) => (0, download_1.download)(magnet));
+    .argument('path', 'c:/media/<path>')
+    .action((magnet, path) => (0, download_1.download)(magnet, path));
 program.parse();
 //# sourceMappingURL=index.js.map
