@@ -7,4 +7,4 @@ Lightweight Torrent CLI
 
 Copy the magnet URL to your clipboard
 
-`torapi download "<magnet>" "movies" 
+`torapi download "<magnet>" "movies"`
