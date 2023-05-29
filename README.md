@@ -1,5 +1,8 @@
 # torapi
-Lightweight Torrent CLI
+
+Light-weight torrent CLI. Easy to use!
+
+## Getting started
 
 `npm run update`
 

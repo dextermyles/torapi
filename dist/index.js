@@ -12,6 +12,8 @@ program.command('search')
 program.command('download')
     .argument('magnet', 'magnet link')
     .argument('path', 'c:/media/<path>')
-    .action((magnet, path) => (0, download_1.download)(magnet, path));
+    .action(function (magnet, path) {
+    return (0, download_1.download)(magnet, path);
+});
 program.parse();
 //# sourceMappingURL=index.js.map
