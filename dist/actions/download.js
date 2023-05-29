@@ -46,6 +46,7 @@ function download(magnet, path) {
         if (!path)
             path = 'movies';
         path = `C:\\media\\${path}\\`;
+        /** @type {*} */
         let options = {
             connections: 200,
             uploads: 10,
@@ -53,7 +54,21 @@ function download(magnet, path) {
             path,
             verify: true,
             dht: true,
-            tracker: true
+            tracker: true,
+            trackers: [
+                "udp://public.popcorn-tracker.org:6969/announce",
+                "http://104.28.1.30:8080/announce",
+                "http://104.28.16.69/announce",
+                "http://107.150.14.110:6969/announce",
+                "http://109.121.134.121:1337/announce",
+                "http://114.55.113.60:6969/announce",
+                "http://125.227.35.196:6969/announce",
+                "http://128.199.70.66:5944/announce",
+                "http://157.7.202.64:8080/announce",
+                "http://158.69.146.212:7777/announce",
+                "http://173.254.204.71:1096/announce",
+                "http://178.175.143.27/announce"
+            ]
         };
         var exists = fs.existsSync(path);
         if (!exists) {
