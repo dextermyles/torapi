@@ -85,7 +85,7 @@ function download(magnet, path) {
                 const downloadedAt = ts_luxon_1.DateTime.now();
                 const downloaded = engine.swarm.downloaded;
                 const bytesRemaining = totalLengthBytes - downloaded;
-                completed = Math.round((engine.swarm.downloaded / totalLengthBytes) * 100.0);
+                completed = ((engine.swarm.downloaded / totalLengthBytes) * 100.0);
                 const diff = downloaded - lastDownloaded;
                 const timeDiff = downloadedAt.diff(lastDate, 'milliseconds')
                     .milliseconds;
@@ -108,7 +108,7 @@ function download(magnet, path) {
                 if (etaMins < 1)
                     timeleft = `${etaSeconds.toFixed(2)} minutes`;
                 const speed = `${mbytes} mb/s`;
-                console.log(chalk_1.default.cyanBright(`${completed}% | ${speed} | ${timeleft} remaining`));
+                console.log(chalk_1.default.cyanBright(`${completed.toFixed(1)}% | ${speed} | ${timeleft} remaining`));
                 if (completed >= 100) {
                     console.log(chalk_1.default.green("DOWNLOAD COMPLETE!"));
                     engine.destroy(() => {

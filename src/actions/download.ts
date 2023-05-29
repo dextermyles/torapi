@@ -69,7 +69,7 @@ export function download(magnet: string, path?: string | undefined): Promise<voi
                 const downloaded = engine.swarm.downloaded;
                 const bytesRemaining = totalLengthBytes - downloaded;
 
-                completed = Math.round((engine.swarm.downloaded / totalLengthBytes) * 100.0);
+                completed = ((engine.swarm.downloaded / totalLengthBytes) * 100.0);
 
                 const diff = downloaded - lastDownloaded;
                 const timeDiff = downloadedAt.diff(lastDate, 'milliseconds')
@@ -104,7 +104,7 @@ export function download(magnet: string, path?: string | undefined): Promise<voi
 
                 const speed = `${mbytes} mb/s`;
 
-                console.log(chalk.cyanBright(`${completed}% | ${speed} | ${timeleft} remaining`));
+                console.log(chalk.cyanBright(`${completed.toFixed(1)}% | ${speed} | ${timeleft} remaining`));
 
                 if (completed >= 100) {
                     console.log(chalk.green("DOWNLOAD COMPLETE!"));
